@@ -32,12 +32,14 @@ export class HomeComponent implements OnInit {
   getalltweets(){
     this.tweetService.getalltweets().subscribe(data =>{
        //console.log(data);
-       
+      
        this.tweetList = data;
-       
        console.log(this.tweetList);
        
+    }, (error) =>{
+      this.router.navigate(['/login']);
     });
+    
     for(let i = 0; i<this.tweetList.length;i++){
     this.showLike.push(false);
     this.showallcomment.push(false);

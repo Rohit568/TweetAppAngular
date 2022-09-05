@@ -9,7 +9,9 @@ import { RegisterComponent } from './register/register.component';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { LogoutComponent } from './logout/logout.component'
+import { LogoutComponent } from './logout/logout.component';
+import { PostComponent } from './post/post.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { LogoutComponent } from './logout/logout.component'
     RegisterComponent,
     HomeComponent,
     HeaderComponent,
-    LogoutComponent
+    LogoutComponent,
+    PostComponent,
+    DashboardComponent
   ],
   imports: [
     HttpClientModule,

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, ObservableLike } from 'rxjs';
 import { IsAuthorized } from 'src/payloads/IsAuthorized';
 import { LoginCredential } from 'src/payloads/LoginCredential';
+import { Reply } from 'src/payloads/reply';
 import { ResponseMessage } from 'src/payloads/ResponseMessage';
+import { Tweet } from 'src/payloads/Tweet';
 import { TweetResponse } from 'src/payloads/TweetResponse';
 import { User } from 'src/payloads/User';
 import { UserToken } from 'src/payloads/UserToken';
@@ -12,6 +14,27 @@ import { UserToken } from 'src/payloads/UserToken';
   providedIn: 'root'
 })
 export class TweetappService {
+  submitcomment(id: string, reply: Reply) {
+
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.put<TweetResponse>("http://localhost:8180/api/v1.0/tweets/reply/"+id,reply,  { headers });
+    return response;
+  }
+  posttweet(tweet:Tweet) {
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    let username = sessionStorage.getItem('username');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.post<String>("http://localhost:8180/api/v1.0/tweets/"+username+"/add",tweet,  { headers });
+    return response;
+   
+  }
+  liketweet(id: string) {
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.get<TweetResponse>("http://localhost:8180/api/v1.0/tweets/like/"+id,  { headers });
+    return response;
+  }
   loginUser(credential: LoginCredential) :Observable<UserToken>{
     
     let response = this.httpClient.post<UserToken>("http://localhost:8180/api/v1.0/tweets/login", credential);
@@ -42,11 +65,11 @@ export class TweetappService {
 
  }
 
- getalltweets():Observable<TweetResponse>{
+ getalltweets(){
 
   let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
   const headers= new HttpHeaders().set("Authorization", tokens);
-  let response = this.httpClient.get<TweetResponse>("http://localhost:8180/api/v1.0/tweets/all",{headers});
+  let response= this.httpClient.get<TweetResponse[]>("http://localhost:8180/api/v1.0/tweets/all",{headers});
   return response;
  }
 }

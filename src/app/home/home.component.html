@@ -1,11 +1,69 @@
 <app-header></app-header>
-<div class ="container">
-  
-    <div class="media border p-3">
-        <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-        <div class="media-body">
-          <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-          <p>Lorem ipsum...</p>
+<div class="container">
+    <div *ngFor="let tweet of tweetList; let i = index; ">
+        <div class="media border p-3">
+            <img src="../../assets/image/profile.png" alt={{tweet.username}} class="mr-3 mt-3 rounded-circle"
+                style="width:60px;">
+            <div class="media-body">
+                <h6>{{tweet.username}} <small><i>Posted on {{tweet.tweetDate |date : 'medium'}}</i></small></h6>
+                <p>{{tweet.tweetText}}</p>
+                <p class='text-primary'>{{tweet.tagText}}</p>
+                <div>
+                    <button class="btn btn-outline btn-sm" (click)="liketweet(i)"><i><img
+                                src=".././assets/image/icons8-facebook-like-16.png" /></i></button>
+                    <button class="btn btn-outline btn-sm" (click)="showandhidelike(i)"><i>
+                            {{tweet.likesCount}}</i></button>
+                    <button class="btn btn-outline btn-sm"><i><img (click)="showinputt(i)"
+                                src=".././assets/image/icons8-comments-24.png" /></i></button>
+                    <button class="btn btn-outline btn-sm" (click)="showandhidecomment(i)"><i>
+                            {{tweet.commentCount}}</i></button>
+
+                </div>
+
+                <div *ngIf="showLike?.[i]" class="container border">
+                    <div class="media">
+                        
+                        <div class="media-body">
+                            <div *ngFor="let likeby of tweet.likes">
+                                <button class='btn btn-outline btn-sm'>{{likeby}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="showallcomment?.[i]" class="container border p-3">
+                  <div *ngFor = "let comm of tweet.comments">
+                    <div class="media border p-3">
+                        <img src="../../assets/image/profile.png" alt={{tweet.username}} class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                        
+                            <h6>{{comm.username}} <small><i>Posted on {{comm.commentDate |date : 'medium'}}</i></small></h6>
+                            <p>{{comm.comment}}</p>
+                       
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="showinput?.[i]" class="border p-3">
+
+                    <div class="media border">
+                        
+                        <div class="media-body p-3 ">
+                            <div >
+                                <!-- Email input -->
+
+                                <div class="form-group">
+                                    <textarea id="form1Example13" width ="80%" placeholder="reply...." maxlength="144"
+                                         [(ngModel)] = "commentvalue" class="form-control" ></textarea>
+                                    
+                                       </div>
+                                <div class="form-group">
+                                    <p>{{commentvalue.length}}/144</p>
+                                    <button (click) = "submitcomment(i)" class ='btn btn-secondary btn-lg'>send</button>
+                                </div>
+                            </div>>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
 </div>

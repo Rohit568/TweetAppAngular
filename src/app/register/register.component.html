@@ -1,123 +1,137 @@
-<section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                    class="img-fluid" alt="Phone image">
+<div class="container justify-content-around">
+    <!--
+     kjgdlkjg
+    -->
+
+
+    <nav class="navbar navbar-expand-sm navbar-dark">
+        <div class="container bg-dark">
+            <div class="navbar-header">
+                <i class="navbar-brand text-white"><span class="text-primary">Tweet</span>App</i>
             </div>
+            <ul class="nav navbar-nav">
 
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link" href="/login"><span
+                            class="glyphicon glyphicon-log-out"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container border">
+        <div class="container2 bg-secondary">
 
-
-                <form [formGroup]='registerForm' (ngSubmit)="onSubmit()">
-                    <div class="card-body p-md-5 text-black">
-                        <div class="form-outline mb-4">
-                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                            <span class="h1 fw-bold mb-0">TweetApp</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="form-outline">
-                                    <input type="text" id="form3Example1m" formControlName="firstName"
-                                        class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1m">First name</label>
-
-                                </div>
-
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="form-outline">
-                                    <input type="text" id="form3Example1n" formControlName="lastName"
-                                        class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1n">Last name</label>
-                                </div>
+            <form [formGroup]='registerForm' (ngSubmit)="onSubmit()">
+                <div class="card-body p-md-5 text-black">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                <input type="text" id="form3Example1m" formControlName="firstName"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="form3Example1m">First name</label>
 
                             </div>
-                            <div *ngIf="submitted && registerForm.get('firstName')?.hasError('required')"
-                                class="alert alert-danger">
 
-                                First Name is required
-
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                <input type="text" id="form3Example1n" formControlName="lastName"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="form3Example1n">Last name</label>
                             </div>
+
                         </div>
+                        <div *ngIf="submitted && registerForm.get('firstName')?.hasError('required')"
+                            class="alert alert-danger">
 
+                            First Name is required
 
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form3Example8" formControlName="username"
-                                class="form-control form-control-lg" />
-                            <label class="form-label" for="form3Example8">User Name</label>
-                            <div *ngIf="submitted && registerForm.get('username')?.hasError('required')"
-                                class="alert alert-danger">
-                                <div *ngIf="registerForm.get('username')?.hasError('required')">
-                                    User Name is required
-                                </div>
-                            </div>
                         </div>
-                        <div class="form-outline mb-4">
-                            <input type="email" id="form3Example97" formControlName="email"
-                                class="form-control form-control-lg" />
-                            <label class="form-label" for="form3Example97">Email ID</label>
-                            <div *ngIf="submitted && registerForm.get('email')?.hasError('required')"
-                                class="alert alert-danger">
-                                <div *ngIf="registerForm.get('email')?.hasError('required')">
-                                    Email is required
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form3Example99" formControlName="contact"
-                                class="form-control form-control-lg" />
-                            <label class="form-label" for="form3Example99">Contact</label>
-                            <div *ngIf="submitted && registerForm.get('contact')?.hasError('required')"
-                                class="alert alert-danger">
-                                <div *ngIf="registerForm.get('contact')?.hasError('required')">
-                                    Contact is required
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="password" id="form3Example98" formControlName="password"
-                                class="form-control form-control-lg" />
-                            <label class="form-label" for="form3Example98">Password</label>
-                            <div *ngIf="submitted && registerForm.get('password')?.hasError('required')"
-                                class="alert alert-danger">
-                                <div *ngIf="registerForm.get('password')?.hasError('required')">
-                                    Password is required
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="confirm-password" id="form3Example99" formControlName="confirmPassword"
-                                class="form-control form-control-lg" />
-                            <label class="form-label" for="form3Example99">Confirm Password</label>
-                            <div *ngIf="submitted && registerForm.get('confirmPassword')?.hasError('required')"
-                                class="alert alert-danger">
-                                <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
-                                    Confirm Password is required
-                                </div>
-                                ​
-                                <div *ngIf="registerForm.get('confirmPassword')?.hasError('confirmPasswordValidator')">
-                                    Passsword and Confirm Password didn't match.
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="d-flex justify-content-end pt-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Submit form</button>
-                        </div>
-
                     </div>
 
-                </form>
 
-            </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form3Example8" formControlName="username"
+                            class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example8">User Name</label>
+                        <div *ngIf="submitted && registerForm.get('username')?.hasError('required')"
+                            class="alert alert-danger">
+                            <div *ngIf="registerForm.get('username')?.hasError('required')">
+                                User Name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form3Example97" formControlName="email"
+                            class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example97">Email ID</label>
+                        <div *ngIf="submitted && registerForm.get('email')?.hasError('required')"
+                            class="alert alert-danger">
+                            <div *ngIf="registerForm.get('email')?.hasError('required')">
+                                Email is required
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form3Example99" formControlName="contact"
+                            class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example99">Contact</label>
+                        <div *ngIf="submitted && registerForm.get('contact')?.hasError('required')"
+                            class="alert alert-danger">
+                            <div *ngIf="registerForm.get('contact')?.hasError('required')">
+                                Contact is required
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form3Example98" formControlName="password"
+                            class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example98">Password</label>
+                        <div *ngIf="submitted && registerForm.get('password')?.hasError('required')"
+                            class="alert alert-danger">
+                            <div *ngIf="registerForm.get('password')?.hasError('required')">
+                                Password is required
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="confirm-password" id="form3Example99" formControlName="confirmPassword"
+                            class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example99">Confirm Password</label>
+                        <div *ngIf="submitted && registerForm.get('confirmPassword')?.hasError('required')"
+                            class="alert alert-danger">
+                            <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+                                Confirm Password is required
+                            </div>
+                            ​
+                            <div *ngIf="registerForm.get('confirmPassword')?.hasError('confirmPasswordValidator')">
+                                Passsword and Confirm Password didn't match.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="d-flex justify-content-end pt-3">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit form</button>
+
+                    </div>
+                    <div class="d-flex justify-content-end pt-3">
+                       
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login"
+                            class="link-primary">Login</a></p>
+                    </div>
+
+                </div>
+
+            </form>
 
         </div>
+
     </div>
-</section>
+</div>

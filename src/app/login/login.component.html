@@ -1,67 +1,73 @@
-<div class = "container justify-content-around">
-   <!--
+<div class="container justify-content-around pb-3">
+    <!--
     kjgdlkjg
    -->
 
-   
-<nav class="navbar navbar-expand-sm navbar-dark">
-    <div class="container bg-dark">
-      <div class="navbar-header">
-        <i class="navbar-brand text-white"><span class = "text-primary">Tweet</span>App</i>
-      </div>
-      <ul class="nav navbar-nav">
-    
-      </ul> 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class = "nav-link" href="/register"><span class="glyphicon glyphicon-log-out"></span> Register</a></li>
-      </ul>
+
+    <nav class="navbar navbar-expand-sm navbar-dark">
+        <div class="container bg-dark">
+            <div class="navbar-header">
+                <i class="navbar-brand text-white"><span class="text-primary">Tweet</span>App</i>
+            </div>
+            <ul class="nav navbar-nav">
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link" href="/register"><span
+                            class="glyphicon glyphicon-log-out"></span> Register</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container border">
+        <div class="container2" style="background-color: #eee;">
+
+
+            <div class="container align-items-center">
+                <form [formGroup]="loginForm" (ngSubmit)="authorize()">
+                    <!-- Email input -->
+
+                    <div class="form-group mb-2">
+                        <input type="text" id="form1Example13" placeholder="username" formControlName="username"
+                            class="form-control form-control-sm" />
+                        <label class="form-label" for="form1Example13">User name</label>
+                    </div>
+                    <div *ngIf="submitted && loginForm.get('username')?.hasError('required')"
+                        class="alert alert-danger">
+                        <div *ngIf="loginForm.get('username')?.hasError('required')">
+                            User Name is required
+                        </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <input type="text" id="form1Example23" placeholder="password" formControlName="password"
+                            class="form-control form-control-sm" />
+                        <label class="form-label" for="form1Example23">Password</label>
+                    </div>
+                    <div *ngIf="submitted && loginForm.get('password')?.hasError('required')"
+                        class="alert alert-danger">
+                        <div *ngIf="loginForm.get('password')?.hasError('required')">
+                            Password is required
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end pt-3">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+
+                    </div>
+                   
+                    <div class="d-flex justify-content-end pt-3">
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account. <a href="/register"
+                                class="link-success">Register</a></p>
+                    </div>
+                  
+                    <div *ngIf = "wrongpass" class="d-flex justify-content-end pt-3">
+                        <p class="small fw-bold mt-2 pt-1 mb-0 link-danger" >Password or username is wrong</p>
+                                
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
     </div>
-  </nav>
-<div class = "container border">
-<div class="container2 bg-secondary">
-     
-
-    <div class="container align-items-center">
-        <form [formGroup]="loginForm" (ngSubmit)="authorize()">
-            <!-- Email input -->
-            
-            <div class="form-group mb-3">
-                <input type="text" id="form1Example13" placeholder="username" formControlName="username"
-                    class="form-control form-control-lg" />
-                <label class="form-label" for="form1Example13">User name</label>
-            </div>
-            <div *ngIf="submitted && loginForm.get('username')?.hasError('required')" class="alert alert-danger">
-                <div *ngIf="loginForm.get('username')?.hasError('required')">
-                    User Name is required
-                </div>
-            </div>
-
-            <!-- Password input -->
-            <div class="form-group">
-                <input type="text" id="form1Example23" placeholder="password" formControlName="password"
-                    class="form-control form-control-lg" />
-                <label class="form-label" for="form1Example23">Password</label>
-            </div>
-            <div *ngIf="submitted && loginForm.get('password')?.hasError('required')" class="alert alert-danger">
-                <div *ngIf="loginForm.get('password')?.hasError('required')">
-                    Password is required
-                </div>
-            </div>
-            <div class="text-center text-lg-start mt-4 pt-2">
-                <button type="submit" class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
-                        class="link-danger">Register</a></p>
-            </div>
-            <div class="d-flex justify-content-around align-items-center mb-4">
-
-            </div>
-
-            <!-- Submit button -->
-
-
-
-        </form>
-    </div>
- </div>
- </div>

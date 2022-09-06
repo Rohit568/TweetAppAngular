@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
 
    showinputt(i:number){
     this.showinput[i] = !this.showinput[i];
-    if(this.showLike[i] || this.showinput[i])
+    if(this.showLike[i] || this.showallcomment[i])
     {
       this.showLike[i] = false;
       this.showallcomment[i] = false;

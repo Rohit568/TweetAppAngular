@@ -19,25 +19,25 @@
         </div>
     </nav>
     <div class="container border">
-        <div class="container2 bg-secondary">
+        <div class="container2" style = "background-color: #eee;">
 
             <form [formGroup]='registerForm' (ngSubmit)="onSubmit()">
-                <div class="card-body p-md-5 text-black">
+                <div class="card-body p-md-3 pt-1 text-black">
                     
                     <div class="row">
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-2">
                             <div class="form-outline">
                                 <input type="text" id="form3Example1m" formControlName="firstName"
-                                    class="form-control form-control-lg" />
+                                    class="form-control form-control-sm" />
                                 <label class="form-label" for="form3Example1m">First name</label>
 
                             </div>
 
                         </div>
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-2">
                             <div class="form-outline">
                                 <input type="text" id="form3Example1n" formControlName="lastName"
-                                    class="form-control form-control-lg" />
+                                    class="form-control form-control-sm" />
                                 <label class="form-label" for="form3Example1n">Last name</label>
                             </div>
 
@@ -51,9 +51,9 @@
                     </div>
 
 
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-2">
                         <input type="text" id="form3Example8" formControlName="username"
-                            class="form-control form-control-lg" />
+                            class="form-control form-control-sm" />
                         <label class="form-label" for="form3Example8">User Name</label>
                         <div *ngIf="submitted && registerForm.get('username')?.hasError('required')"
                             class="alert alert-danger">
@@ -62,9 +62,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-2">
                         <input type="email" id="form3Example97" formControlName="email"
-                            class="form-control form-control-lg" />
+                            class="form-control form-control-sm" />
                         <label class="form-label" for="form3Example97">Email ID</label>
                         <div *ngIf="submitted && registerForm.get('email')?.hasError('required')"
                             class="alert alert-danger">
@@ -74,9 +74,9 @@
                         </div>
                     </div>
 
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-2">
                         <input type="text" id="form3Example99" formControlName="contact"
-                            class="form-control form-control-lg" />
+                            class="form-control form-control-sm" />
                         <label class="form-label" for="form3Example99">Contact</label>
                         <div *ngIf="submitted && registerForm.get('contact')?.hasError('required')"
                             class="alert alert-danger">
@@ -86,9 +86,9 @@
                         </div>
                     </div>
 
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-2">
                         <input type="password" id="form3Example98" formControlName="password"
-                            class="form-control form-control-lg" />
+                            class="form-control form-control-sm" />
                         <label class="form-label" for="form3Example98">Password</label>
                         <div *ngIf="submitted && registerForm.get('password')?.hasError('required')"
                             class="alert alert-danger">
@@ -98,9 +98,9 @@
                         </div>
                     </div>
 
-                    <div class="form-outline mb-4">
-                        <input type="confirm-password" id="form3Example99" formControlName="confirmPassword"
-                            class="form-control form-control-lg" />
+                    <div class="form-outline mb-2">
+                        <input type="password" id="form3Example99" formControlName="confirmPassword"
+                            class="form-control form-control-sm" />
                         <label class="form-label" for="form3Example99">Confirm Password</label>
                         <div *ngIf="submitted && registerForm.get('confirmPassword')?.hasError('required')"
                             class="alert alert-danger">
@@ -118,7 +118,7 @@
 
 
                     <div class="d-flex justify-content-end pt-3">
-                        <button type="submit" class="btn btn-primary btn-lg">Submit form</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
 
                     </div>
                     <div class="d-flex justify-content-end pt-3">
@@ -126,6 +126,15 @@
                         <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login"
                             class="link-primary">Login</a></p>
                     </div>
+                    <div *ngIf = "checksuccess" class="d-flex justify-content-end pt-3">
+                       
+                        <p class="link-success">Successfully registered</p>
+                    </div>
+                    <div *ngIf = "notregistered" class="d-flex justify-content-end pt-3">
+                       
+                        <p  class="link-danger">Something is wrong</p>
+                    </div>
+
 
                 </div>
 

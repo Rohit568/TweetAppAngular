@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservableLike } from 'rxjs';
+import { ChangePassword } from 'src/payloads/ChangePassword';
 import { IsAuthorized } from 'src/payloads/IsAuthorized';
 import { LoginCredential } from 'src/payloads/LoginCredential';
 import { Reply } from 'src/payloads/reply';
@@ -8,12 +9,41 @@ import { ResponseMessage } from 'src/payloads/ResponseMessage';
 import { Tweet } from 'src/payloads/Tweet';
 import { TweetResponse } from 'src/payloads/TweetResponse';
 import { User } from 'src/payloads/User';
+import { UserResponse } from 'src/payloads/UserResponse';
 import { UserToken } from 'src/payloads/UserToken';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TweetappService {
+  changepassword(newPass: ChangePassword) {
+
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    let username = sessionStorage.getItem('username');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.put<String>("http://localhost:8180/api/v1.0/tweets/"+username+"/forgot",newPass, { headers });
+    return response;
+    
+  }
+  deletetweet(id: string) {
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    let username = sessionStorage.getItem('username');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.delete<String>("http://localhost:8180/api/v1.0/tweets/"+username+"/delete/"+id,  { headers });
+    return response;
+  }
+  edittweet(id: string) {
+    throw new Error('Method not implemented.');
+  }
+  getalluserinfo() {
+
+    let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    let username = sessionStorage.getItem('username');
+    const headers= new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.get<UserResponse>("http://localhost:8180/api/v1.0/tweets/user/search/"+username,  { headers });
+    return response;
+     
+  }
   submitcomment(id: string, reply: Reply) {
 
     let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
@@ -25,7 +55,7 @@ export class TweetappService {
     let tokens:string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers= new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.post<String>("http://localhost:8180/api/v1.0/tweets/"+username+"/add",tweet,  { headers });
+    let response = this.httpClient.post<any>("http://localhost:8180/api/v1.0/tweets/"+username+"/add",tweet,  { headers });
     return response;
    
   }

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm !:FormGroup;
   submitted: boolean = false;
+  wrongpass:boolean = false;
   constructor(private fb : FormBuilder, private tweetAppService: TweetappService, private router : Router) { }
 
   ngOnInit(): void {
@@ -36,6 +37,9 @@ export class LoginComponent implements OnInit {
       if(data.auth){
         this.router.navigate(["home"]);
       }
+    },(error)=>{
+      this.wrongpass = true;
+      console.log(error);
     });
      
   }

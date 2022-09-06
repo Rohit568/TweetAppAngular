@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
   
   submitted : boolean = false;
   user !:User;
+  notregistered :boolean = false;
+  checksuccess = false;
   constructor(private fb :FormBuilder, private service : TweetappService) { }
   
   ngOnInit(): void {
@@ -38,17 +40,30 @@ export class RegisterComponent implements OnInit {
 
   onSubmit():void{
      this.submitted = true;
-
+     if(this.submitted)
+      this.notregistered = false;
+      if(this.registerForm.value.firstName ==='' || this.registerForm.value.username===''||
+      this.registerForm.value.email === '' || this.registerForm.value.password === ''){
+        this.notregistered= true;
+      }
+      
       let user= new User(this.registerForm.value.firstName,
       this.registerForm.value.lastName,
-      this.registerForm.value.username,
+      this.registerForm.value.username, 
       this.registerForm.value.email,
       this.registerForm.value.contact,
       this.registerForm.value.password);
-      console.log(this.registerForm.value);
+     // console.log(this.registerForm.value);
       this.service.registerUser(user).subscribe(data=>{
+        console.log(data);
          let something = data;
-         console.log(something);
+         
+         this.checksuccess = true;
+         this.notregistered = false;
+      },
+      (error)=>{
+        this.notregistered = true;
+        this.checksuccess = false;
       });
 
     }

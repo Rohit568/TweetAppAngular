@@ -1,4 +1,144 @@
 <app-header></app-header>
 <div class = 'container border p-3'>
+    <div class ='container row p-3'>
+        <div class = 'd-flex p-3 justify-content-center'>
+            <h1>My DashBoard</h1>
+            </div>
+    </div>
+    <div class ='container row p-3'>
+        <div class = 'row'>
+            <div class ='col-4 border p-3'>
+                <div class ='container p-3'>
+                    <div class = 'row'>
+                        <img src="../../assets/image/profile.png"  class="mr-3 mt-3 rounded-circle"
+                        style="width:500px;"> 
+                    </div>
+                    <div class ='row'>
+                        <button type = "btn btn-warning btn-lg">Change Photo</button>
+                    </div>
+                </div>
+            </div>
+            <div class ='col-8 ml-3 border p-3' style = "background-color: #eee;">
+                <div class = 'd-flex p-3 justify-content-center'>
+                    First Name : {{userResponse.firstName}}
+                </div>
+                <div class = 'd-flex p-3 justify-content-center'>
+                    Last Name :  {{userResponse.lastName}}
+                </div>
+               
+                <div class = 'd-flex p-3 justify-content-center'>
+                    Email :    {{userResponse.email}}
+                </div>
+                <div class = 'd-flex p-3 justify-content-center'>
+                    Contact :  {{userResponse.contact}}
+                </div>
+                <div class = 'd-flex p-3 justify-content-center'>
+                   Total Posts :  {{userResponse.tweetResponse.length}}
+                </div>
+                <div class = 'row'>
+                    <div class = "col-5">
+                    <div class = 'd-flex p-3 justify-content-center'>
+                        <button (click) = "showposts()" class ="btn btn-primary btn-lg"> Show/Hide</button>
+                     </div>
+                    </div>
+                     <div class = "col-5">
+                     <div class = 'd-flex p-3 justify-content-center'>
+                        <button (click) = "showpasswordinput()" class ="btn btn-warning btn-lg"> Change Password</button>
+                     </div>
+                     <div *ngIf = "change"class = 'd-flex p-3 justify-content-center'>
+                        <input type = 'text' class = 'input-group-text' [(ngModel)] = 'newpassword'>
+                        <button (click) = "changepassword()" class ="btn btn-secondary btn-sm"> Change</button>
+                     </div>
+                     <div *ngIf = "!passwordlengthcheck || passworderror"class = 'd-flex p-3 justify-content-center'>
+                        <p class = 'link-danger'>{{passworderrormsg}}</p>
+                       </div>
+                       <div *ngIf = "passwordchanged"class = 'd-flex p-3 justify-content-center'>
+                        <p class = 'link-success'>Password changed Successfully</p>
+                       </div>
 
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+        
+    </div>
+    <div *ngIf="showtweet" class = "container row">
+
+        <div class="container">
+            <div *ngFor="let tweet of tweetList; let i = index; ">
+                <div class="media border p-3">
+                    <img src="../../assets/image/profile.png" alt={{tweet.username}} class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h6>{{tweet.username}} <small><i>Posted on {{tweet.tweetDate |date : 'medium'}}</i></small></h6>
+                        <p>{{tweet.tweetText}}</p>
+                        <p class='text-primary'>{{tweet.tagText}}</p>
+                        <div>
+                            <button class="btn btn-outline btn-sm" (click)="liketweet(i)"><i><img
+                                        src=".././assets/image/icons8-facebook-like-16.png" /></i></button>
+                            <button class="btn btn-outline btn-sm" (click)="showandhidelike(i)"><i>
+                                    {{tweet.likesCount}}</i></button>
+                            <button class="btn btn-outline btn-sm"><i><img (click)="showinputt(i)"
+                                        src=".././assets/image/icons8-comments-24.png" /></i></button>
+                            <button class="btn btn-outline btn-sm" (click)="showandhidecomment(i)"><i>
+                                    {{tweet.commentCount}}</i></button>
+                            <button class="btn btn-outline btn-sm"><i><img (click)= "edittweet(i)"
+                                        src=".././assets/image/icons8-edit-26.png" /></i></button>
+                            <button class="btn btn-outline btn-sm"><i><img (click)="deletetweet(i)"
+                                            src=".././assets/image/icons8-trash-can-16.png" /></i></button>
+                            
+                        
+        
+                        </div>
+        
+                        <div *ngIf="showLike?.[i]" class="container border">
+                            <div class="media">
+                                
+                                <div class="media-body">
+                                    <div *ngFor="let likeby of tweet.likes">
+                                        <button class='btn btn-outline btn-sm'>{{likeby}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="showallcomment?.[i]" class="container border p-3">
+                          <div *ngFor = "let comm of tweet.comments">
+                            <div class="media border p-3">
+                                <img src="../../assets/image/profile.png" alt={{tweet.username}} class="mr-3 mt-3 rounded-circle"
+                                style="width:60px;">
+                                
+                                    <h6>{{comm.username}} <small><i>Posted on {{comm.commentDate |date : 'medium'}}</i></small></h6>
+                                    <p>{{comm.comment}}</p>
+                               
+                            </div>
+                        </div>
+                        </div>
+                        <div *ngIf="showinput?.[i]" class="border p-3">
+        
+                            <div class="media border">
+                                
+                                <div class="media-body p-3 ">
+                                    <div >
+                                        <!-- Email input -->
+        
+                                        <div class="form-group">
+                                            <textarea id="form1Example13" width ="80%" placeholder="reply...." maxlength="144"
+                                                 [(ngModel)] = "commentvalue" class="form-control" ></textarea>
+                                            
+                                               </div>
+                                        <div class="form-group">
+                                            <p>{{commentvalue.length}}/144</p>
+                                            <button (click) = "submitcomment(i)" class ='btn btn-secondary btn-lg'> reply </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

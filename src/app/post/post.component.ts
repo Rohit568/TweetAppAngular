@@ -24,6 +24,11 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.service.isLogin().subscribe( data=>{
+      if(!data.auth)
+      this.router.navigate(["login"]);
+   } );
+  
   }
  
   addtweet(){

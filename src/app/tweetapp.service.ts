@@ -18,6 +18,12 @@ import { UserToken } from 'src/payloads/UserToken';
   providedIn: 'root'
 })
 export class TweetappService {
+  gettagtweets(tag: Tag) {
+    let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
+    const headers = new HttpHeaders().set("Authorization", tokens);
+    let response = this.httpClient.post<TweetResponse[]>("http://localhost:8180/api/v1.0/tweets/gettagtweet", tag,{ headers });
+    return response;
+  }
   updatetweet(newtweet: EditPojo) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');

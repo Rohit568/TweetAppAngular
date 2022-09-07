@@ -95,6 +95,8 @@ export class UserdashboardComponent implements OnInit {
     
   }
  
- 
+  viewuserdetail(username:String){
+    this.router.navigateByUrl('/userdashboard/'+username);
+  }
  
 }

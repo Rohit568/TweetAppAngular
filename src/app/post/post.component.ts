@@ -47,7 +47,9 @@ export class PostComponent implements OnInit {
     console.log(tweet);
     this.service.posttweet(tweet).subscribe(data =>{
       let str = data;
+     
       console.log(str);
+      this.router.navigate(['home']);
     })
 ;  }
 }

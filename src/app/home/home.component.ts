@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TestabilityRegistry } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Reply } from 'src/payloads/reply';
+import { Tag } from 'src/payloads/Tag';
 import { TweetResponse } from 'src/payloads/TweetResponse';
 import { TweetappService } from '../tweetapp.service';
 
@@ -13,11 +14,15 @@ import { TweetappService } from '../tweetapp.service';
 export class HomeComponent implements OnInit {
  
   tweetList:TweetResponse[] = [];
+  tweetList2:TweetResponse[] = [];
   showLike: boolean[] = [] ;
   showallcomment:boolean[] = [] ;
   showinput:boolean[] = [];
   commentForm!:FormGroup;
   commentvalue='';
+  tagvalue ='';
+  showsearch=false;
+  iszero = false;
   constructor(private fb : FormBuilder,private  tweetService :TweetappService, private router:Router ) { }
  
   ngOnInit(): void {
@@ -29,7 +34,33 @@ export class HomeComponent implements OnInit {
 
     this.getalltweets();
   }
+  searchtag(){
+   
+    this.iszero = false;
+    let tag = new Tag(this.tagvalue);
+    this.tweetService.gettagtweets(tag).subscribe(data =>{
+       //console.log(data);
+      
+       this.tweetList = data;
+       if(this.tweetList.length == 0){
+        this.iszero = true;
+      }
+       console.log(this.tweetList);
+       
+    }, (error) =>{
+      this.router.navigate(['/login']);
+    });
+  
+    for(let i = 0; i<this.tweetList.length;i++){
+    this.showLike.push(false);
+    this.showallcomment.push(false);
+    this.showinput.push(false);
+    }
+    
+  }
+  
   getalltweets(){
+    this.iszero =false;
     this.tweetService.getalltweets().subscribe(data =>{
        //console.log(data);
       
@@ -39,12 +70,13 @@ export class HomeComponent implements OnInit {
     }, (error) =>{
       this.router.navigate(['/login']);
     });
-    
+   
     for(let i = 0; i<this.tweetList.length;i++){
     this.showLike.push(false);
     this.showallcomment.push(false);
     this.showinput.push(false);
     }
+   
   }
 
    showandhidelike(i:number){
@@ -89,7 +121,9 @@ export class HomeComponent implements OnInit {
      });
      this.getalltweets();
    }
-
+   viewuserdetail(username:String){
+    this.router.navigateByUrl('/userdashboard/'+username);
+  }
   
 }
  

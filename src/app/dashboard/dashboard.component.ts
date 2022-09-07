@@ -141,5 +141,8 @@ export class DashboardComponent implements OnInit {
         this.passworderror = true;
       })
   }
+  viewuserdetail(username:String){
+    this.router.navigateByUrl('/userdashboard/'+username);
+  }
 
 }

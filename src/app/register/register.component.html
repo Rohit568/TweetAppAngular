@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark">
         <div class="container bg-dark">
             <div class="navbar-header">
-                <i class="navbar-brand text-white"><span class="text-primary">Tweet</span>App</i>
+                <h1 class="navbar-brand text-white"><span class="text-primary">Tweet</span>App</h1>
             </div>
             <ul class="nav navbar-nav">
 
@@ -130,9 +130,9 @@
                        
                         <p class="link-success">Successfully registered</p>
                     </div>
-                    <div *ngIf = "notregistered" class="d-flex justify-content-end pt-3">
+                    <div *ngIf = "!passwordmatch" class="d-flex justify-content-end pt-3">
                        
-                        <p  class="link-danger">Something is wrong</p>
+                        <p  class="link-danger">Password is not matching</p>
                     </div>
 
 

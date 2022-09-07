@@ -14,7 +14,8 @@ import { PostComponent } from './post/post.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
-import { EditComponent } from './edit/edit.component'
+import { EditComponent } from './edit/edit.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EditComponent } from './edit/edit.component'
     UsersComponent,
     UserdashboardComponent,
     EditComponent
+   
   ],
   imports: [
     HttpClientModule,

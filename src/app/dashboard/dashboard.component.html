@@ -98,7 +98,7 @@
                                 
                                 <div class="media-body">
                                     <div *ngFor="let likeby of tweet.likes">
-                                        <button class='btn btn-outline btn-sm'>{{likeby}}</button>
+                                        <button (click) = "viewuserdetail(likeby)" class='btn btn-outline btn-sm'>{{likeby}}</button>
                                     </div>
                                 </div>
                             </div>

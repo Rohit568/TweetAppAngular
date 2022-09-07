@@ -10,11 +10,15 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
   users:String[]=[];
   showall= true;
-  searchvalue = "";
+  searchvalue:string = '';
   searchedusers:string[] =[];
   constructor(private tweetService : TweetappService, private router: Router) { }
 
   ngOnInit(): void {
+    this.tweetService.isLogin().subscribe( data=>{
+      if(!data.auth)
+      this.router.navigate(["login"]);
+   } );
     this.getalltheusers();
   }
   

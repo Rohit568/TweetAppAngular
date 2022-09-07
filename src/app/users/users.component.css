@@ -1,0 +1,12 @@
+.container2{
+    width: 25%;
+    height: 40px;
+    background: #eee;
+    margin-bottom: 1px;
+    margin-left: 37%;
+    border :none;
+    
+    border-radius: 5px;
+    text-align: center;
+    color: black;
+}

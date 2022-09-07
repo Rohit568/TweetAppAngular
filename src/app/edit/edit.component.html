@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class  = "container2 p-2" style ="background-color: #eee;">
+
+    <div class = "container p-3" >
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1"> Text</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]= "tweettext"rows="3" maxlength="144"></textarea>
+          </div>
+         <div class = "form-group">
+            <p >{{tweettext.length}}/144</p>
+               </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Tag</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)] = "tagtext" rows="3" maxlength="50"></textarea>
+        </div>
+        <div class = "form-group">
+            <p >{{tagtext.length}}/50</p>
+               </div>
+        <div class = 'form-group'>
+        <button type="submit" class="btn btn-primary btn-lg"  (click)="updatetweet()"
+        style="padding-left: 2.5rem; padding-right: 2.5rem;">Edit</button>
+         </div>
+         <div class = "form-group">
+            
+            <h3 *ngIf = 'texterror' class = 'text-danger'>{{errormsg}}</h3>
+            <h3 *ngIf = 'textsuccess' class = 'text-primary'>Successfully Edited</h3>
+          
+            
+         </div>
+        </div>
+
+   </div>

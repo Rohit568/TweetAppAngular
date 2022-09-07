@@ -11,7 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PostComponent } from './post/post.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
+import { UserdashboardComponent } from './userdashboard/userdashboard.component';
+import { EditComponent } from './edit/edit.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     HeaderComponent,
     LogoutComponent,
     PostComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent,
+    UserdashboardComponent,
+    EditComponent
   ],
   imports: [
     HttpClientModule,

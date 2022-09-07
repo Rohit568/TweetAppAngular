@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="container p-3">
+<div class="input-group justify-content-center mb-3">
+    <div class="form-outline">
+        <input type="search" id="form1" [(ngModel)] ="searchvalue" placeholder = "@Username" class="form-control" />
+    </div>
+    <div class = "form-outline ml-1">
+        <button type="button" (click) = "searchuser()"class="btn btn-primary">
+           Search
+        </button>
+    </div>
+
+</div>
+<div *ngIf="showall" class="container p-3 border">
+  <div *ngFor = "let username of users; i : index;">
+        <button (click) = "viewuserdetail(username)" class = "container2 btn btn-outline-secondary">
+            <div>
+                {{username}}
+            </div>
+        </button>
+    
+    </div>
+</div>
+<div *ngIf="!showall" class="container p-3 border">
+    <div *ngFor = "let username of searchedusers; i : index;">
+          <button (click) = "viewuserdetail(username)" class = "container2 btn btn-outline-secondary">
+              <div>
+                  {{username}}
+              </div>
+          </button>
+      
+      </div>
+  </div>

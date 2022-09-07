@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { NavigationError, NavigationExtras, Route, Router } from '@angular/router';
 import { ChangePassword } from 'src/payloads/ChangePassword';
+import { EditPojo } from 'src/payloads/EditPojo';
 import { Reply } from 'src/payloads/reply';
 import { ResponseMessage } from 'src/payloads/ResponseMessage';
 import { TweetR } from 'src/payloads/TweetR';
 import { TweetResponse } from 'src/payloads/TweetResponse';
 import { UserResponse } from 'src/payloads/UserResponse';
+import { EditComponent } from '../edit/edit.component';
 import { TweetappService } from '../tweetapp.service';
 
 @Component({
@@ -18,6 +20,7 @@ export class DashboardComponent implements OnInit {
 
   userResponse!: UserResponse;
   showtweet: boolean = false;
+  globalusername: string = sessionStorage.getItem('username') || '';
   tweetList: TweetR[] = [];
   showLike: boolean[] = [];
   showallcomment: boolean[] = [];
@@ -31,6 +34,7 @@ export class DashboardComponent implements OnInit {
   passworderror = false;
   passwordchanged = false;
   response!: ResponseMessage;
+  editcontent!:EditPojo;
   constructor(private tweetService: TweetappService, private router: Router) { }
 
 
@@ -44,7 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getalluserinfo() {
-    this.tweetService.getalluserinfo().subscribe(data => {
+    this.tweetService.getallmyinfo().subscribe(data => {
       this.userResponse = data;
       console.log(this.userResponse);
       this.tweetList = this.userResponse.tweetResponse;
@@ -72,7 +76,7 @@ export class DashboardComponent implements OnInit {
     this.tweetService.liketweet(id).subscribe(data => {
 
     })
-
+     this.getalluserinfo();
   }
 
   showinputt(i: number) {
@@ -92,10 +96,17 @@ export class DashboardComponent implements OnInit {
     this.tweetService.submitcomment(id, reply).subscribe(data => {
 
     });
-
+    this.getalluserinfo();
   }
   edittweet(i: number) {
-
+       this.editcontent = new EditPojo(this.tweetList[i].tweetId, this.tweetList[i].tweetText, this.tweetList[i].tagText)
+       console.log(this.editcontent);
+       let navigationExtras : NavigationExtras ={
+         queryParams : {
+          "data" : JSON.stringify(this.editcontent)
+         }
+      };
+      this.router.navigate(["edit"], navigationExtras );
   }
   deletetweet(i: number) {
     let id = this.tweetList[i].tweetId;

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   tagvalue ='';
   showsearch=false;
   iszero = false;
+  tagstring:string[][]=[];
   constructor(private fb : FormBuilder,private  tweetService :TweetappService, private router:Router ) { }
  
   ngOnInit(): void {
@@ -70,11 +71,15 @@ export class HomeComponent implements OnInit {
     }, (error) =>{
       this.router.navigate(['/login']);
     });
-   
+    
     for(let i = 0; i<this.tweetList.length;i++){
     this.showLike.push(false);
     this.showallcomment.push(false);
     this.showinput.push(false);
+    
+  //   let arr= this.tweetList[i].tagText.split(" ");
+  //  // this.tagstring.push([]);
+  //   this.tagstring[i].push(arr);
     }
    
   }

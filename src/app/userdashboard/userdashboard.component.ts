@@ -72,6 +72,8 @@ export class UserdashboardComponent implements OnInit {
     this.tweetService.liketweet(id).subscribe(data => {
 
     })
+    this.showtweet =true;
+    location.reload();
     
   }
 

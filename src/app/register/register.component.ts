@@ -20,24 +20,25 @@ export class RegisterComponent implements OnInit {
   notregistered: boolean = false;
   checksuccess = false;
   passwordmatch = true;
-  constructor(private fb: FormBuilder, private service: TweetappService, private router: Router) { }
+  
+  
+  constructor(private fb: FormBuilder, private service: TweetappService, private router: Router) {
+    this.registerForm = this.fb.group(
+      {
+        firstName: ["", [Validators.required, Validators.pattern('^[a-zA-Z]{3,}$')]],
+        lastName: [""],
+        username: [null,[Validators.required, Validators.pattern('^[a-z][a-zA-Z0-9]{3,}$')]],
+        email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+        contact!: [null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[7896][0-9]{9}$")]],
+        password: [null, [Validators.required, Validators.pattern('^[a-z0-9A-Z]{6,}$')]],
+        confirmPassword: [null, [Validators.required, Validators.pattern('^[a-z0-9A-Z]{6,}$')]]
+      }
+    );
+   }
 
   ngOnInit(): void {
 
-    this.registerForm = this.fb.group(
-      {
-        firstName: ["", Validators.required],
-        lastName: [""],
-        username: ["", Validators.required],
-        email: ["", [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-        contact: ["", Validators.required],
-        password: ["", Validators.required],
-        confirmPassword: ["", Validators.required]
-      },
-      {
-        validator: ConfirmPasswordValidator("password", "confirmPassword")
-      }
-    );
+   
   }
   successsubmit() {
     let user = new User(this.registerForm.value.firstName,
@@ -62,14 +63,13 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+  
+    console.log("9758375"+ this.registerForm.get('contact')?.errors)
+    console.log(this.registerForm.errors);
     this.passwordmatch = true;
-    if (this.registerForm.value.firstName === '' || this.registerForm.value.username === '' ||
-      this.registerForm.value.email === '' || this.registerForm.value.password === '' ||
-      this.registerForm.value.confirmPassword === '') {
-      this.notregistered = true;
-
-    }
-    else if (!('' + this.registerForm.value.password === '' + this.registerForm.value.confirmPassword)) {
+    if(this.registerForm.invalid){
+      
+    } else if (!('' + this.registerForm.value.password === '' + this.registerForm.value.confirmPassword)) {
       this.passwordmatch = false;
 
     }

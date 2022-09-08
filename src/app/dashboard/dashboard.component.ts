@@ -97,6 +97,7 @@ export class DashboardComponent implements OnInit {
 
     });
     this.getalluserinfo();
+    location.reload();
   }
   edittweet(i: number) {
        this.editcontent = new EditPojo(this.tweetList[i].tweetId, this.tweetList[i].tweetText, this.tweetList[i].tagText)
@@ -115,7 +116,8 @@ export class DashboardComponent implements OnInit {
     this.tweetService.deletetweet(id).subscribe(data => {
 
     });
-    this.getalluserinfo();
+    location.reload();
+    
   }
   showpasswordinput() {
     this.change = true;

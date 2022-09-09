@@ -15,6 +15,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { EditComponent } from './edit/edit.component';
+import { SearchComponent } from './search/search.component';
+
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { EditComponent } from './edit/edit.component';
     DashboardComponent,
     UsersComponent,
     UserdashboardComponent,
-    EditComponent
+    EditComponent,
+    SearchComponent
    
   ],
   imports: [

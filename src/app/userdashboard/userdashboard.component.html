@@ -59,7 +59,9 @@
                     <div class="media-body">
                         <h6>{{globalusername}} <small><i>Posted on {{tweet.tweetDate |date : 'medium'}}</i></small></h6>
                         <p>{{tweet.tweetText}}</p>
-                        <p class='text-primary'>{{tweet.tagText}}</p>
+                        <p *ngFor="let curtag of functionarr(tweet.tagText)" style ="margin: 0; padding:0;">
+                            <small><a (click) = "searchtag2(curtag)" class ="link-primary">#{{curtag}}</a></small>
+                        </p>
                         <div>
                             <button class="btn btn-outline btn-sm" (click)="liketweet(i)"><i><img
                                         src=".././assets/image/icons8-facebook-like-16.png" /></i></button>

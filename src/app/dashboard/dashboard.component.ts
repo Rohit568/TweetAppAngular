@@ -122,6 +122,14 @@ export class DashboardComponent implements OnInit {
   showpasswordinput() {
     this.change = true;
   }
+  functionarr(val:string):string[]{
+    let str = val.split(" ");
+    return str;
+ }
+ searchtag2(val:string){
+    this.router.navigateByUrl("search/"+val);
+
+ }
   changepassword() {
     this.passwordlengthcheck = true;
     if (this.newpassword.length < 6) {

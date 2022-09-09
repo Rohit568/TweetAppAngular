@@ -50,6 +50,14 @@ export class UserdashboardComponent implements OnInit {
       this.tweetList = this.userResponse.tweetResponse;
     })
   }
+  functionarr(val:string):string[]{
+    let str = val.split(" ");
+    return str;
+ }
+ searchtag2(val:string){
+    this.router.navigateByUrl("search/"+val);
+
+ }
   showposts() {
     this.showtweet = !this.showtweet;
   }

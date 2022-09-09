@@ -1,17 +1,18 @@
-import { Component, OnInit, TestabilityRegistry } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Reply } from 'src/payloads/reply';
 import { Tag } from 'src/payloads/Tag';
 import { TweetResponse } from 'src/payloads/TweetResponse';
 import { TweetappService } from '../tweetapp.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class HomeComponent implements OnInit {
+export class SearchComponent implements OnInit {
+
  
   tweetList:TweetResponse[] = [];
   tweetList2:TweetResponse[] = [];
@@ -24,52 +25,103 @@ export class HomeComponent implements OnInit {
   showsearch=false;
   iszero = false;
   tagstring:any[]=[];
-    constructor(private fb : FormBuilder,private  tweetService :TweetappService, private router:Router ) { }
+    constructor(private route :ActivatedRoute, private fb : FormBuilder,private  tweetService :TweetappService, private router:Router ) { }
  
   ngOnInit(): void {
     this.tweetService.isLogin().subscribe( data=>{
        if(!data.auth)
        this.router.navigate(["login"]);
     } );
-   
+    this.route.params.subscribe(param =>{
+       this.tagvalue = param['tag'];
+    })
+    this.searchtag();
 
-    this.getalltweets();
+    
   }
- 
+  searchtag(){
+   
+    this.iszero = false;
+    let tag = new Tag(this.tagvalue);
+    this.tweetService.gettagtweets(tag).subscribe(data =>{
+       //console.log(data);
+      
+       this.tweetList = data;
+       if(this.tweetList.length == 0){
+        this.iszero = true;
+      }
+       console.log(this.tweetList);
+       
+    }, (error) =>{
+      this.router.navigate(['/login']);
+    });
+  
+    for(let i = 0; i<this.tweetList.length;i++){
+    this.showLike.push(false);
+    this.showallcomment.push(false);
+    this.showinput.push(false);
+   
+    }
+    console.log(this.tagstring );
+    
+  }
 
   functionarr(val:string):string[]{
      let str = val.split(" ");
      return str;
   }
   searchtag2(val:string){
-     this.router.navigateByUrl("search/"+val);
- 
-  }
-  
-  getalltweets(){
-    this.iszero =false;
-    this.tweetService.getalltweets().subscribe(data =>{
+   
+    this.iszero = false;
+    this.tagvalue = val;
+    let tag = new Tag(this.tagvalue);
+    this.tweetService.gettagtweets(tag).subscribe(data =>{
        //console.log(data);
       
        this.tweetList = data;
-       
+       if(this.tweetList.length == 0){
+        this.iszero = true;
+      }
        console.log(this.tweetList);
        
     }, (error) =>{
       this.router.navigate(['/login']);
     });
-    
+  
     for(let i = 0; i<this.tweetList.length;i++){
     this.showLike.push(false);
     this.showallcomment.push(false);
     this.showinput.push(false);
    
-  //   let arr= this.tweetList[i].tagText.split(" ");
-  //  // this.tagstring.push([]);
-  //   this.tagstring[i].push(arr);
     }
-   
+    console.log(this.tagstring );
+    
   }
+  
+  // getalltweets(){
+  //   this.iszero =false;
+  //   this.tweetService.getalltweets().subscribe(data =>{
+  //      //console.log(data);
+      
+  //      this.tweetList = data;
+       
+  //      console.log(this.tweetList);
+       
+  //   }, (error) =>{
+  //     this.router.navigate(['/login']);
+  //   });
+    
+  //   for(let i = 0; i<this.tweetList.length;i++){
+  //   this.showLike.push(false);
+  //   this.showallcomment.push(false);
+  //   this.showinput.push(false);
+   
+  // //   let arr= this.tweetList[i].tagText.split(" ");
+  // //  // this.tagstring.push([]);
+  // //   this.tagstring[i].push(arr);
+  //   }
+   
+  // }
 
    showandhidelike(i:number){
       this.showLike[i] = !this.showLike[i];
@@ -90,7 +142,7 @@ export class HomeComponent implements OnInit {
       this.tweetService.liketweet(id).subscribe(data=>{
           this.tweetList[i] = data;
       })
-     this.getalltweets();
+    
    }
 
    showinputt(i:number){
@@ -111,11 +163,10 @@ export class HomeComponent implements OnInit {
      this.tweetService.submitcomment(id, reply).subscribe(data =>{
         this.tweetList[i] = data;
      });
-     this.getalltweets();
+    
    }
    viewuserdetail(username:String){
     this.router.navigateByUrl('/userdashboard/'+username);
   }
-  
+
 }
- 

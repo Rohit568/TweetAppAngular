@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PostComponent } from './post/post.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchComponent } from './search/search.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { UsersComponent } from './users/users.component';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path : "dashboard", component: DashboardComponent},
   {path : "users", component: UsersComponent},  
   {path : "userdashboard/:uname",component: UserdashboardComponent},
-  {path : "edit", component:EditComponent}
+  {path : "edit", component:EditComponent},
+  {path: "search/:tag", component:SearchComponent}
 
 ];
 

@@ -1,5 +1,27 @@
+<p>search works!</p>
 <app-header></app-header>
-<div  class="container">
+<div class="input-group justify-content-center mb-3">
+    <div class="form-outline">
+        <input type="text" id="form1" [(ngModel)]="tagvalue" placeholder="Tag search.." class="form-control" />
+    </div>
+    <div class="form-outline ml-1" style="margin-left: 2px;">
+        <button type="button" (click)="searchtag()" class="btn btn-primary">
+            Search
+        </button>
+    </div>
+  
+</div>
+<div *ngIf="iszero" class="container p-3">
+    <div class="container p-3 border">
+        <div class="input-group justify-content-center mb-3">
+            <div class="form-outline">
+                <h1>Seem's this tag doesn't belongs</h1>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="!iszero" class="container">
     <div *ngFor="let tweet of tweetList; let i = index; ">
         <div class="media border p-3">
             <img src="../../assets/image/profile.png" alt={{tweet.username}} class="mr-3 mt-3 rounded-circle"

@@ -11,8 +11,10 @@ import { RegisterComponent } from './register/register.component';
 import { SearchComponent } from './search/search.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { UsersComponent } from './users/users.component';
+import { WelcomComponent } from './welcom/welcom.component';
 
-const routes: Routes = [
+const routes: Routes = [ 
+  {path : "", component:WelcomComponent},
   {path: "login" ,component:LoginComponent},
   {path : "register", component: RegisterComponent},
   {path : "home", component:HomeComponent},
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path : "userdashboard/:uname",component: UserdashboardComponent},
   {path : "edit", component:EditComponent},
   {path: "search/:tag", component:SearchComponent}
+ 
 
 ];
 

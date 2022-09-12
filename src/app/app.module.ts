@@ -16,6 +16,8 @@ import { UsersComponent } from './users/users.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { EditComponent } from './edit/edit.component';
 import { SearchComponent } from './search/search.component';
+import { WelcomComponent } from './welcom/welcom.component';
+
 
 
 
@@ -32,7 +34,8 @@ import { SearchComponent } from './search/search.component';
     UsersComponent,
     UserdashboardComponent,
     EditComponent,
-    SearchComponent
+    SearchComponent,
+    WelcomComponent
    
   ],
   imports: [

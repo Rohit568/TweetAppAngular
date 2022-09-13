@@ -48,7 +48,8 @@ export class UserdashboardComponent implements OnInit {
       this.userResponse = data;
       console.log(this.userResponse);
       this.tweetList = this.userResponse.tweetResponse;
-    })
+    });
+
   }
   functionarr(val:string):string[]{
     let str = val.split(" ");
@@ -105,8 +106,9 @@ export class UserdashboardComponent implements OnInit {
     
   }
  
-  viewuserdetail(username:String){
-    this.router.navigateByUrl('/userdashboard/'+username);
+  viewuserdetail(username:string){
+    
+  
   }
  
 }

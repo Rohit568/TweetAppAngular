@@ -18,37 +18,38 @@ import { UserToken } from 'src/payloads/UserToken';
   providedIn: 'root'
 })
 export class TweetappService {
+  serverurl:string = "http://localhost:8180/api/v1.0/tweets";
   gettagtweets(tag: Tag) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.post<TweetResponse[]>("http://localhost:8180/api/v1.0/tweets/gettagtweet", tag,{ headers });
+    let response = this.httpClient.post<TweetResponse[]>(this.serverurl+"/gettagtweet", tag,{ headers });
     return response;
   }
   updatetweet(newtweet: EditPojo) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.put<String>("http://localhost:8180/api/v1.0/tweets/" + username + "/update", newtweet, { headers });
+    let response = this.httpClient.put<String>(this.serverurl+"/" + username + "/update", newtweet, { headers });
     return response;
   }
   searchuser(user:string) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<string[]>("http://localhost:8180/api/v1.0/tweets/allsimilaruser/"+user, { headers });
+    let response = this.httpClient.get<string[]>(this.serverurl+"/allsimilaruser/"+user, { headers });
     return response;
   }
   searchtweetbytag(tag:Tag){
 
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.post<TweetResponse[]>("http://localhost:8180/api/v1.0/tweets/gettagtweet", tag,{ headers });
+    let response = this.httpClient.post<TweetResponse[]>(this.serverurl+"/gettagtweet", tag,{ headers });
     return response;
   }
   getalltheusers() {
     
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<string[]>("http://localhost:8180/api/v1.0/tweets/users/all", { headers });
+    let response = this.httpClient.get<string[]>(this.serverurl+"/users/all", { headers });
     return response;
   }
   changepassword(newPass: ChangePassword) {
@@ -56,7 +57,7 @@ export class TweetappService {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.put<String>("http://localhost:8180/api/v1.0/tweets/" + username + "/forgot", newPass, { headers });
+    let response = this.httpClient.put<String>(this.serverurl+"/" + username + "/forgot", newPass, { headers });
     return response;
 
   }
@@ -64,7 +65,7 @@ export class TweetappService {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.delete<String>("http://localhost:8180/api/v1.0/tweets/" + username + "/delete/" + id, { headers });
+    let response = this.httpClient.delete<String>(this.serverurl+"/" + username + "/delete/" + id, { headers });
     return response;
   }
   edittweet(id: string) {
@@ -75,7 +76,7 @@ export class TweetappService {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<UserResponse>("http://localhost:8180/api/v1.0/tweets/user/search/" + username, { headers });
+    let response = this.httpClient.get<UserResponse>(this.serverurl+"/user/search/" + username, { headers });
     return response;
 
   }
@@ -83,7 +84,7 @@ export class TweetappService {
 
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
      const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<UserResponse>("http://localhost:8180/api/v1.0/tweets/user/search/" + username, { headers });
+    let response = this.httpClient.get<UserResponse>(this.serverurl+"/user/search/" + username, { headers });
     return response;
 
   }
@@ -91,26 +92,26 @@ export class TweetappService {
 
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.put<TweetResponse>("http://localhost:8180/api/v1.0/tweets/reply/" + id, reply, { headers });
+    let response = this.httpClient.put<TweetResponse>(this.serverurl+"/reply/" + id, reply, { headers });
     return response;
   }
   posttweet(tweet: Tweet) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let username = sessionStorage.getItem('username');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.post<any>("http://localhost:8180/api/v1.0/tweets/" + username + "/add", tweet, { headers });
+    let response = this.httpClient.post<any>(this.serverurl+"/" + username + "/add", tweet, { headers });
     return response;
 
   }
   liketweet(id: string) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<TweetResponse>("http://localhost:8180/api/v1.0/tweets/like/" + id, { headers });
+    let response = this.httpClient.get<TweetResponse>(this.serverurl+"/like/" + id, { headers });
     return response;
   }
   loginUser(credential: LoginCredential): Observable<UserToken> {
 
-    let response = this.httpClient.post<UserToken>("http://localhost:8180/api/v1.0/tweets/login", credential);
+    let response = this.httpClient.post<UserToken>(this.serverurl+"/login", credential);
 
     response.subscribe(data => {
       sessionStorage.setItem("username", data.username);
@@ -123,7 +124,7 @@ export class TweetappService {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     let headers = new HttpHeaders().set("Authorization", tokens);
     headers.append('Access-Control-Allow-Origin', '*');
-    let response = this.httpClient.get<IsAuthorized>("http://localhost:8180/api/v1.0/tweets/authorize", { headers });
+    let response = this.httpClient.get<IsAuthorized>(this.serverurl+"/authorize", { headers });
 
     return response;
   }
@@ -133,7 +134,7 @@ export class TweetappService {
   ) { };
 
   registerUser(user: User): Observable<ResponseMessage> {
-    let response = this.httpClient.post<ResponseMessage>("http://localhost:8180/api/v1.0/tweets/register", user);
+    let response = this.httpClient.post<ResponseMessage>(this.serverurl+"/register", user);
     //console.log(response);
     return response;
 
@@ -143,7 +144,7 @@ export class TweetappService {
 
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);
-    let response = this.httpClient.get<TweetResponse[]>("http://localhost:8180/api/v1.0/tweets/all", { headers });
+    let response = this.httpClient.get<TweetResponse[]>(this.serverurl+"/all", { headers });
     return response;
   }
 }

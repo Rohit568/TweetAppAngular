@@ -18,7 +18,8 @@ import { UserToken } from 'src/payloads/UserToken';
   providedIn: 'root'
 })
 export class TweetappService {
-  serverurl:string = "http://localhost:8180/api/v1.0/tweets";
+ // serverurl:string = "http://localhost:5000/api/v1.0/tweets";
+  serverurl:string ="http://54.212.232.101:5000/api/v1.0/tweets";
   gettagtweets(tag: Tag) {
     let tokens: string = 'Bearer ' + sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders().set("Authorization", tokens);

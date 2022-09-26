@@ -64,8 +64,8 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
   
-    console.log("9758375"+ this.registerForm.get('contact')?.errors)
-    console.log(this.registerForm.errors);
+    console.log("9758375")
+    console.log(this.registerForm.value);
     this.passwordmatch = true;
     if(this.registerForm.invalid){
       
